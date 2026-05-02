@@ -1020,10 +1020,6 @@ footer {
 }
 .jobs-table a:hover {
   text-decoration: underline;
-  .jobs-table tr {
-      display: table-row !important; 
-      width: 100%;
-  }
 }
 
 .jobs-table tr:hover {

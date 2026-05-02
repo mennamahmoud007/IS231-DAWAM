@@ -52,7 +52,7 @@ let applyBtn = document.getElementById('apply-btn');
 let applyForm = document.querySelector('.apply-form');
 
 applyBtn.addEventListener('click', function() {
-  if (applyForm.style.display === 'none') {
+  if (applyForm.style.display === 'none' || applyForm.style.display === '') {
     applyForm.style.display = 'block';
   } else {
     applyForm.style.display = 'none';

@@ -2,38 +2,41 @@
 //              Applied Jobs Page
 // ============================================
 let applications = JSON.parse(localStorage.getItem("applications")) || [];
-//as it saved at the local storage as string so we need to parse it to get the array of objects and if there is no data in local storage we will get null so we need to set it to an empty array to avoid errors when we try to access it.
 let tbody = document.getElementById("jobsBody");
 
 function renderApplications() {
     let emptyState = document.getElementById("emptyState");
     let tableContainer = document.getElementById("tableContainer");
-    //let statsSection = document.querySelector(".stats"); 
 
     if (applications.length === 0) {
         emptyState.style.display = "block";
         tableContainer.style.display = "none";
-       //if(statsSection) statsSection.style.display = "none";
     } else {
         emptyState.style.display = "none";
         tableContainer.style.display = "block";
-       // if(statsSection) statsSection.style.display = "flex";
-
        let rowsHtml = ""; 
-        applications.forEach(function(app) {
-        rowsHtml += `
-            <tr>
-                <td>
-                    <strong>${app.title || 'Untitled Job'}</strong>
-                    <p class="schedule">${app.schedule || 'Full-time'}</p>
-                </td>
-                <td>${app.company || 'Unknown Company'}</td>
-                <td>${app.location || 'Not Specified'}</td>
-                <td>${app.date || 'Not Specified'}</td>
-                <td><span class="badge ${getStatusClass(app.status)}">${app.status || 'Applied'}</span></td>
-                <td><a href="job-details.html?id=${app.jobId}" class="view-btn">View Job</a></td>
-            </tr>
-        `;
+        applications.forEach(app => {
+            rowsHtml += `
+                <tr>
+                    <td>
+                        <strong>${app.title || 'Untitled Job'}</strong>
+                        <p class="schedule">${app.schedule || 'Full-time'}</p>
+                    </td>
+                    <td>${app.company || 'Unknown Company'}</td>
+                    <td>${app.location || 'Not Specified'}</td>
+                    <td>${app.date || 'Not Specified'}</td>
+                    <td>
+                        <span class="badge ${getStatusClass(app.status)}">
+                            ${app.status || 'Applied'}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="job-details.html?id=${app.jobId}" class="view-btn">
+                            View Job
+                        </a>
+                    </td>
+                </tr>
+            `;
         });
         tbody.innerHTML = rowsHtml; 
     }
