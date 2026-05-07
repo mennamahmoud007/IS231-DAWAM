@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Jobs </title>   
-    <link rel="stylesheet" href="../StyleSheet.css" >
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css'%}" >
       
 </head>
 <body>
@@ -12,10 +13,10 @@
     <nav class="navbar">
   <div class="logo">DAWAM</div>
   <ul class="navLinks">
-          <li> <a href="home.html"> Home  </a> </li>
-          <li><a href="guestBrowse.html" class="active"> Browse Jobs </a></li>
-          <li><a href="login.html"> Login </a></li>
-          <li><a href="signup.html"> Sign Up </a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'guest-browse' %}">Browse Jobs</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}" class="nav-cta">Sign Up</a></li>
        </ul>
  </nav>
 
@@ -60,6 +61,6 @@
 
     
     <script src="../JavaScript/data.js" ></script>
-    <script src="../JavaScript/browsescript.js"></script>
+    <script src="{% static 'JS/browsescript.js' %}"></script>
 </body>
 </html>

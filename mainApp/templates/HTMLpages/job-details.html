@@ -1,18 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Details</title>
-    <link rel="stylesheet" href="../StyleSheet.css" >
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css'%}" >
 </head>
 <body>
      <nav class="navbar">
         <div class="logo">DAWAM</div>
         <ul class="navLinks"> 
-            <li> <a href="browse.html">Browse Jobs</a> </li>
-            <li> <a href="applied-jobs.html">My applied jobs</a></li>
-            <li> <a href="home.html">Logout</a></li>
+            <li> <a href="{% url 'browse' %}">Browse Jobs</a> </li>
+            <li> <a href="{% url 'applied-jobs' %}" class="active">My applied jobs</a></li>
+            <li> <a href="{% url 'logout' %}">Logout</a></li>
         </ul> 
     </nav>
     <main class="job-details-page">
@@ -98,6 +99,6 @@
   </aside>
 </main>
   <script src="../JavaScript/data.js"></script>
-<script src="../JavaScript/jobdetails.js"></script> 
+<script src="{% static 'JS/jobdetails.js' %}"></script> 
 </body>
 </html>

@@ -39,7 +39,7 @@ def applied_jobs(request):
 def browse(request):
     return render(request, 'HTMLpages/browse.html')
 def guest_browse(request):
-    return render(request, 'HTMLpages/guest-browse.html')
+    return render(request, 'HTMLpages/guestBrowse.html')
 def job_details(request, job_id):
     return render(request, 'HTMLpages/job-details.html', {'job_id': job_id})
 def logout_view(request):
@@ -52,4 +52,8 @@ def login(request):
 def signup(request):
     return render(request, 'HTMLpages/signup.html')
 
+# def dashboard(request):
+#     return render(request, 'HTMLpages/dashboard.html')
+def addjob(request):
+    return render(request, 'HTMLpages/add-job.html')
 

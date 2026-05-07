@@ -1,19 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Job</title>
-    <link rel="stylesheet" href="../StyleSheet.css" >
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css'%}" >
 
 </head>
 <body class="add-job">
     <nav class="navbar">
         <div class="logo">DAWAM</div>
         <ul class="navLinks">
-            <li><a href="dashboard.html"> My Jobs </a></li>
-            <li><a href="add-job.html" class="active"> Post a Job </a></li>
-            <li><a href="home.html"> Logout </a></li>
+            <li><a href="{% url 'dashboard' %}"> My Jobs </a></li>
+            <li><a href="{% url 'addjob' %}" class="active"> Post a Job </a></li>
+            <li><a href="{% url 'logout' %}"> Logout </a></li>
         </ul>
     </nav>
     <h1 id="myH"> Add New Job Posting </h1>
@@ -136,7 +137,7 @@
     </form>
   
     <script src="../JavaScript/data.js"></script>
-    <script src="../JavaScript/addjob-script.js"></script>
+    <script src="{% static 'JS/addjob-script.js' %}"></script>
 
 </body>
 </html>

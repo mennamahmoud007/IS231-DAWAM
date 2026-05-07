@@ -11,6 +11,8 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
     path('guest-browse/', views.guest_browse, name='guest-browse'),
+    # path('dashboard/', views.dashboard, name = 'dashboard'),
+    path('addjob/', views.addjob, name = 'addjob')
     
 
 ]
