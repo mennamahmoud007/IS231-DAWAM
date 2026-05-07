@@ -66,6 +66,7 @@ class Application(models.Model):
         ('Rejected', 'Rejected'),
     ]
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    schedule = models.CharField(max_length=100) 
     applicant = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)

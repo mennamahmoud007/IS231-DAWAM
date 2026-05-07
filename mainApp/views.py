@@ -11,7 +11,7 @@ def get_applications_api(request): #AJAX API to fetch applications for the logge
     if request.user.is_authenticated:
         applications = Application.objects.filter(applicant=request.user).values(
             'id', 'job__title', 'job__company', 'job__location', 
-            'date', 'status'
+            'date', 'status', 'job__schedule'
         )
         
         total = len(list(applications))

@@ -31,7 +31,10 @@ async function loadApplications() {
             
             return `
                 <tr>
-                    <td><strong>${app.job__title}</strong></td>
+                    <td>
+                    <strong>${app.job__title}</strong>
+                    <p class="schedule">${app.job__schedule}</p>
+                    </td>
                     <td>${app.job__company}</td>
                     <td>${app.job__location}</td>
                     <td>${new Date(app.date).toLocaleDateString()}</td>
