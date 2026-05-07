@@ -31,22 +31,22 @@
 
     <div class="applied-card">
         <p>Total Applied</p>
-        <h2 id="total">{{ total }}</h2>
+        <h2 id="total">0</h2>
     </div>
 
     <div class="applied-card">
         <p>Under Review</p>
-        <h2 id="review">{{ review }}</h2>
+        <h2 id="review">0</h2>
     </div>
 
     <div class="applied-card response">
         <p>Response Rate</p>
-        <h2 id="response">{{ response }}%</h2>
+        <h2 id="response">0%</h2>
     </div>
 
     <div class="applied-card highlight">
         <p>New Offers</p>
-        <h2 id="accepted">{{ accepted }}</h2>
+        <h2 id="accepted">0</h2>
     </div>
 
 </div>
@@ -78,43 +78,11 @@
     </thead>
 
     <tbody id="jobsBody">
-        {% if applications %}
-            {% for app in applications %}
-            <tr>
-                <td>
-                    <strong>{{ app.job.title }}</strong>
-                    <p class="schedule">{{ app.job.schedule }}</p>
-                </td>
-                <td>{{ app.job.company }}</td>
-                <td>{{ app.job.location }}</td>
-                <td>{{ app.date }}</td>
-                <td>
-                    <span class="badge 
-                        {% if app.status == 'Accepted' %}accepted
-                        {% elif app.status == 'Rejected' %}rejected
-                        {% elif app.status == 'Under Review' %}review
-                        {% else %}applied{% endif %}
-                    ">
-                        {{ app.status }}
-                    </span>
-                </td>
-                <td>
-                    <a href="{% url 'job-details' app.job.id %}" class="view-btn">
-                        View Job
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        {% else %}
-            <script>
-                document.getElementById("emptyState").style.display = "block";
-                document.getElementById("tableContainer").style.display = "none";
-            </script>
-        {% endif %}
-
     </tbody>
 
 </table>
-  
+
+<script src="{% static 'JS/applied-jobs.js' %}"></script>
+
 </body>
 </html>

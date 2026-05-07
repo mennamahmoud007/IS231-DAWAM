@@ -1,28 +1,55 @@
 from django.shortcuts import render
 #from django.contrib.auth.decorators import login_required
 from .models import Application
+from django.http import JsonResponse
+from django.contrib.auth import logout
+
+
 
 #@login_required
-def applied_jobs(request):
+def get_applications_api(request): #AJAX API to fetch applications for the logged-in user
     if request.user.is_authenticated:
-        applications = Application.objects.filter(applicant=request.user)
-    else:
-        applications = Application.objects.none()
+        applications = Application.objects.filter(applicant=request.user).values(
+            'id', 'job__title', 'job__company', 'job__location', 
+            'date', 'status'
+        )
+        
+        total = len(list(applications))
+        all_apps = Application.objects.filter(applicant=request.user)
+        review = all_apps.filter(status__icontains="Review").count()
+        accepted = all_apps.filter(status="Accepted").count()
+        rejected = all_apps.filter(status="Rejected").count()
+        
+        response_rate = 0
+        if total > 0:
+            response_rate = round(((accepted + rejected) / total) * 100)
+        
+        return JsonResponse({
+            'applications': list(applications),
+            'stats': {
+                'total': total,
+                'review': review,
+                'accepted': accepted,
+                'response': response_rate
+            }
+        })
+    return JsonResponse({'error': 'Not authenticated'}, status=401)
+def applied_jobs(request):
+    return render(request, 'HTMLpages/applied-jobs.html')
+def browse(request):
+    return render(request, 'HTMLpages/browse.html')
+def guest_browse(request):
+    return render(request, 'HTMLpages/guest-browse.html')
+def job_details(request, job_id):
+    return render(request, 'HTMLpages/job-details.html', {'job_id': job_id})
+def logout_view(request):
+    logout(request)
+    return render(request, 'HTMLpages/home.html')
+def home(request):
+    return render(request, 'HTMLpages/home.html')
+def login(request):
+    return render(request, 'HTMLpages/login.html')
+def signup(request):
+    return render(request, 'HTMLpages/signup.html')
 
-    total = applications.count()
-    review = applications.filter(status__icontains="Review").count()
-    accepted = applications.filter(status="Accepted").count()
-    rejected = applications.filter(status="Rejected").count()
-
-    response_rate = 0
-    if total > 0:
-        response_rate = round(((accepted + rejected) / total) * 100)
-
-    return render(request, 'HTMLpages/applied-jobs.html', {
-        'applications': applications,
-        'total': total,
-        'review': review,
-        'accepted': accepted,
-        'response': response_rate,
-    })
 
