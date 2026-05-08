@@ -84,7 +84,7 @@ if (addjobForm) {
 
         setTimeout(() => {
             successMessage.style.display = "none";
-            window.location.href = "dashboard.html";
+            window.location.href = dashboard_url;
         }, 2000);
     });
 }
