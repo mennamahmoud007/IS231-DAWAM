@@ -81,9 +81,9 @@ if(signupForm) {
             successMessage.style.display = "none";
 
             if (isCompany) {
-            window.location.href = "dashboard.html";
+            window.location.href = dashboard_url;
             } else {
-            window.location.href = "browse.html";
+            window.location.href = browse_url;
             }
         },2000);
     });

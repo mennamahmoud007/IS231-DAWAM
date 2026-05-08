@@ -52,8 +52,8 @@ def login(request):
 def signup(request):
     return render(request, 'HTMLpages/signup.html')
 
-# def dashboard(request):
-#     return render(request, 'HTMLpages/dashboard.html')
+def dashboard(request):
+    return render(request, 'HTMLpages/dashboard.html')
 def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 

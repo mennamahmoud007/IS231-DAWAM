@@ -57,7 +57,11 @@
         <p> Already have an account? <a href="login.html"> Log in </a> </p>
         <div id="signupSuccess" class="success-message"></div>
     </div>
-
+    
+    <script>
+        const dashboard_url = "{% url 'dashboard' %}";
+        const browse_url = "{% url 'browse' %}";
+    </script>
     <script src="{% static 'JS/signup-script.js' %}"></script>
 
 </body>

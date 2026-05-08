@@ -17,9 +17,9 @@ if (login) {
             localStorage.setItem("currentUser", JSON.stringify(storedUser));
 
             if (storedUser.type === "company") {
-                window.location.href = "dashboard.html";
+                window.location.href = dashboard_url;
             } else {
-                window.location.href = "browse.html";
+                window.location.href = browse_url;
             }
         } else {
             alert("Incorrect username/email or password. Please try again.");
