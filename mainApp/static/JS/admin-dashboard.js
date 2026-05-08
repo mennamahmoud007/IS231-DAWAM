@@ -4,7 +4,7 @@
 const user = JSON.parse(localStorage.getItem("currentUser")); // string => object
 
 if (!user) {
-    window.location.href = "login.html";
+    window.location.href = '/login/';
 }
 
 const dashboardTitle = document.getElementById("dashboard-title"); //dashboard's title 

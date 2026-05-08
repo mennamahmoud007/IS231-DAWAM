@@ -1,19 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Applied Jobs</title>
-    <link rel="stylesheet" href="../StyleSheet.css" >
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css' %}" >
 </head>
 <body>
 
  <nav class="navbar">
         <div class="logo">DAWAM</div>
         <ul class="navLinks"> 
-            <li> <a href="browse.html">Browse Jobs</a> </li>
-            <li> <a href="applied-jobs.html" class="active">My applied jobs</a></li>
-            <li> <a href="home.html">Logout</a></li>
+            <li> <a href="{% url 'browse' %}">Browse Jobs</a> </li>
+            <li> <a href="{% url 'applied-jobs' %}" class="active">My applied jobs</a></li>
+            <li> <a href="{% url 'logout' %}">Logout</a></li>
         </ul> 
 </nav>
 
@@ -60,7 +61,7 @@
    </div>
     <h2>No applications yet</h2>
     <p>Start applying to jobs and track your progress here</p>
-    <a href="browse.html" class="btn-primary">Browse Jobs</a>
+    <a href="{% url 'browse' %}" class="btn-primary">Browse Jobs</a>
 </div>
 
 <table class="jobs-table" id="tableContainer">
@@ -77,12 +78,11 @@
     </thead>
 
     <tbody id="jobsBody">
-
     </tbody>
 
 </table>
-  <script src="../JavaScript/data.js"></script>
-  <script src="../JavaScript/applied-jobs.js"></script>
-  
+
+<script src="{% static 'JS/applied-jobs.js' %}"></script>
+
 </body>
 </html>

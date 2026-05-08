@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Sign Up </title>
-    <link rel="stylesheet" href="../StyleSheet.css" >
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css'%}" >
 </head>
 
 <body class="Sign-Up">
     <nav class="navbar">
   <div class="logo">DAWAM</div>
        <ul class="navLinks">
-          <li> <a href="home.html"> Home Page </a> </li>
-          <li><a href="guestBrowse.html"> Browse Jobs </a></li>
-          <li><a href="login.html"> Login </a></li>
-          <li><a href="signup.html" class="active"> Sign Up </a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'guest-browse' %}">Browse Jobs</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}" class="nav-cta">Sign Up</a></li>
        </ul>
  </nav>
     <div class="container">
@@ -58,7 +58,7 @@
         <div id="signupSuccess" class="success-message"></div>
     </div>
 
-    <script src="../JavaScript/signup-script.js"></script>
+    <script src="{% static 'JS/signup-script.js' %}"></script>
 
 </body>
 
