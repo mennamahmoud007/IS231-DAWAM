@@ -9,6 +9,13 @@ class UserViewSet(viewsets.ModelViewSet):
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
 
+    def get_queryset(self):
+        queryset=Job.objects.all()
+        category=self.request.query_params.get('category') # reads ? category= from the URL
+        if category:
+            queryset=queryset.filter(category=category)
+        return queryset    
+
     def get_serializer_class(self):
         if self.action == 'list':      # /api/jobs/
             return JobListSerializer
