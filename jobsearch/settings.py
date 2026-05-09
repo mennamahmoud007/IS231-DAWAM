@@ -121,3 +121,7 @@ STATIC_URL = 'static/'
 STATIC_FILES_DIRS = [
     BASE_DIR / 'mainApp/static',
 ]   
+
+
+
+LOGIN_URL = 'login'

@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 #from django.contrib.auth.decorators import login_required
 from .models import Application
 from django.http import JsonResponse
 from django.contrib.auth import logout
-
+from django.contrib.auth.decorators import login_required
 
 
 #@login_required
@@ -51,9 +51,8 @@ def login(request):
     return render(request, 'HTMLpages/login.html')
 def signup(request):
     return render(request, 'HTMLpages/signup.html')
-
-# def dashboard(request):
-#     return render(request, 'HTMLpages/dashboard.html')
+def dashboard(request):
+    return render(request, 'HTMLpages/dashboard.html')
 def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 

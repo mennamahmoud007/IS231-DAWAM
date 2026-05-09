@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from ..models import Profile, Job, Application
 from .serializers import UserSerializer, JobDetailSerializer, JobListSerializer, ApplicationSerializer
+from django.shortcuts import render
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -24,6 +26,9 @@ class JobViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+<<<<<<< Updated upstream
 
     def perform_create(self, serializer):
         serializer.save(applicant=self.request.user) # Automatically set the applicant to the logged-in user when creating an application
+=======
+>>>>>>> Stashed changes
