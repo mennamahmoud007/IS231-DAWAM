@@ -57,13 +57,11 @@ applyBtn.addEventListener('click', function() {
 
 let nameInput = document.querySelector('input[name="name"]');
 let emailInput = document.querySelector('input[name="email"]');
-let resumeInput = document.querySelector('input[name="resume"]');
 let phoneInput = document.querySelector('input[name="phone"]');
  document.getElementById("application-form").onsubmit= function(e) {
   let namevalid = false;
   let emailvalid = false;
   let phonevalid = false;
-  let resumevalid = false;
   e.preventDefault(); // Prevent form submission to validate first
   if (nameInput.value !="" && nameInput.value.length < 100){
     namevalid = true;
@@ -74,42 +72,40 @@ let phoneInput = document.querySelector('input[name="phone"]');
   if (phoneInput.value != "" && phoneInput.value.length===11 && phoneInput.value.startsWith('0')){
     phonevalid = true;
   }
-  if (resumeInput.value != ""){
-    resumevalid = true;
-  }
-
-  if(namevalid ===false || emailvalid === false || resumevalid === false || phonevalid === false){
+  if(namevalid ===false || emailvalid === false || phonevalid === false){
     e.preventDefault();
     alert("Please fill all fields correctly!");
   }
-  if(namevalid && emailvalid && resumevalid && phonevalid){
+  if(namevalid && emailvalid && phonevalid){
+    fetch('/api/applications/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)?.[1] || '' // Include CSRF token for Django
 
-    const statuses = ["Under Review", "Accepted", "Rejected"];
-    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-      let application = {
-        jobId: idFromUrl,
-        title: currentJob ? currentJob.title : "Untitled Job",
-        company: currentJob ? currentJob.company : "Unknown Company",
-        location: currentJob ? currentJob.location : "Not Specified",
-        schedule: currentJob ? currentJob.schedule : "Full-time", 
-        date: new Date().toLocaleDateString(), 
-        status: randomStatus, 
+      },
+      body: JSON.stringify({
+        job: jobId,
         name: nameInput.value,
         email: emailInput.value,
-        phone: phoneInput.value
+        phone: phoneInput.value,
+        status : "Under Review"
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href="/applied-jobs/"; // Redirect to applied jobs page on success
       }
-        
-    let applications = JSON.parse(localStorage.getItem('applications')) || []; // Get existing applications from localStorage or initialize an empty array
-    applications.push(application); // Add the new application to the array
-    localStorage.setItem('applications', JSON.stringify(applications)); // Save the updated applications array back to localStorage
-      window.location.href = "../pages/applied-jobs.html";
-      console.log("redirecting to applied jobs page...");
-      console.log(applications);
+      else{
+        alert("Failed to submit application. Please try again.");
+      }
+
+
+    }).catch(error => {
+      alert("An error occurred while submitting your application. Please try again.");
+    });
   }
-  else{
-    e.preventDefault(); // Prevent form submission if validation fails
-  }
-}
+};
 
 let shareBtn = document.querySelector('.share-btn');
 shareBtn.addEventListener('click', async  function() {
