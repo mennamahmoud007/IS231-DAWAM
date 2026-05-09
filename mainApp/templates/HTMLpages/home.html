@@ -25,7 +25,7 @@
       <h1>Stop Searching,<br><em>Start Landing!</em></h1>
       <p>Thousands of curated opportunities in one place. Find the role that fits your skills, your goals, and your life.</p>
       <div class="hook-btns">
-        <a href="guestBrowse.html" class="btn-primary">Browse Jobs</a>
+        <a href="{% url 'guest-browse' %}" class="btn-primary">Browse Jobs</a>
         <a href="#features" class="btn-secondary">Learn More</a>
       </div>
     </div>
@@ -79,43 +79,9 @@
   <section class="top-jobs">
     <p class="section-label">Featured Roles</p>
     <h2 class="section-title">Top Jobs This Week</h2>
-    <div class="jobs-grid">
-      <div class="job-card">
-        <h3>Software Engineer</h3>
-        <p class="meta">Google · Remote</p>
-        <span class="job-tag">Full-time</span><span class="job-tag">Remote</span>
-        <a href="login.html">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>UI/UX Designer</h3>
-        <p class="meta">Apple · New York</p>
-        <span class="job-tag">Full-time</span><span class="job-tag">Onsite</span>
-        <a href="login.html">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>Data Analyst</h3>
-        <p class="meta">Meta · Remote</p>
-        <span class="job-tag">Part-time</span><span class="job-tag">Remote</span>
-        <a href="login.html">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>Product Manager</h3>
-        <p class="meta">Amazon · Seattle</p>
-        <span class="job-tag">Full-time</span><span class="job-tag">Onsite</span>
-        <a href="login.html">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>Cybersecurity Analyst</h3>
-        <p class="meta">Microsoft · Remote</p>
-        <span class="job-tag">Full-time</span><span class="job-tag">Remote</span>
-        <a href="login.html">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>Frontend Developer</h3>
-        <p class="meta">Netflix · Los Angeles</p>
-        <span class="job-tag">Full-time</span><span class="job-tag">Hybrid</span>
-        <a href="login.html">Apply Now</a>
-      </div>
+    <div class="jobs-grid" id="home-jobs-grid">
+      <!-- Job cards will be dynamically inserted here by home.js -->
+      
     </div>
   </section>
 
@@ -141,20 +107,13 @@
   <section class="cta-section">
     <h2>Ready for Your Dream Job?</h2>
     <p>Join thousands of professionals who found their path with Jobbiter.</p>
-    <a href="signup.html">Sign Up Now</a>
+    <a href="{% url 'signup' %}">Sign Up Now</a>
   </section>
 
 
   <footer>
     <p>© 2026 DAWAM Jobs </p>
   </footer>
-
-  <script>
-  document.querySelector('a[href="#features"]').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-  });
-</script>
-
+    <script src="{% static 'JS/home.js' %}"></script>
 </body>
 </html>
