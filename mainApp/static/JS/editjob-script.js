@@ -25,7 +25,7 @@ if (editjobForm) {
     // On page load, fetch job details and pre-fill form
     async function loadJob() {
         try {
-            const response = await fetch('/api/jobs/${job_id}/'); // Fetch job details from API
+            const response = await fetch(`/api/jobs/${job_id}/`); // Fetch job details from API
             const job = await response.json();
             if (!response.ok){
                 alert('Could not load job. It may not exist.');
@@ -33,7 +33,7 @@ if (editjobForm) {
             }
         // Pre-fill form with existing job data
         document.getElementById("job-title").value = job.title || "";
-        document.getElementById("job-schedule").value = job.schedule.toLowerCase() || "";
+        document.getElementById("job-schedule").value = job.schedule || "";
         document.getElementById("category").value = job.category || "";
         document.getElementById("status").value = job.status || "";
         document.getElementById("job-description").value = job.description || "";
@@ -81,13 +81,13 @@ editjobForm.addEventListener('submit', async function(e){
     };
 
     try {
-        const response = await fetch('/api/jobs/${job_id}/', {
+        const response = await fetch(`/api/jobs/${job_id}/`, {
             method: 'PUT', // Use PUT method to update existing job
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookies('csrftoken'), // Include CSRF token if required by backend
             },
-            body: JSON.stringify(UpdatedJob), // Send updated job data as JSON
+            body: JSON.stringify(UpdatedJob), // Send updated job data as JSON String
         });
         const data = await response.json();
         const sucessMessage = document.getElementById("editjobSuccess");

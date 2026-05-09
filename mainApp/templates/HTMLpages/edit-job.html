@@ -19,7 +19,7 @@
     </nav>
     <h1 id="myH"> Edit Job Posting </h1>
     <p id="myP"> Company admins can use this form to edit existing job. </p>
-    <a href="dashboard.html" class="back-link"> &larr; Back to Dashboard </a>
+    <a href="{% url 'dashboard' %}" class="back-link"> &larr; Back to Dashboard </a>
 
     <form id="editjobForm">
         {% csrf_token %}
@@ -33,9 +33,9 @@
 
         <label for="job-schedule">  Schedule: </label>
         <select id="job-schedule" name="job-schedule" required>
-            <option value="full-time"> full-time</option>
-            <option value="part-time"> part-time</option>
-            <option value="internship"> internship</option>
+            <option value="Full-time"> Full-time</option>
+            <option value="Part-time"> Part-time</option>
+            <option value="Internship"> Internship</option>
         </select> <br><br>
 
         <label for="category"> Job Category: </label>
@@ -131,7 +131,8 @@
         const dashboard_url = "{% url 'dashboard' %}";
     </script>
     <script>
-        window.job_id = {{ job_id }}; // Django passes this from the view
+        // Django passes this from the view so we can use it in our JavaScript to fetch and update the correct job posting
+        window.job_id = {{ job_id }};
     </script>   
     <script src="{% static 'JS/editjob-script.js' %}"></script> 
 </body>
