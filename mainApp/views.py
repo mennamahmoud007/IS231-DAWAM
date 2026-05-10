@@ -51,8 +51,14 @@ def login(request):
     return render(request, 'HTMLpages/login.html')
 def signup(request):
     return render(request, 'HTMLpages/signup.html')
+
+@login_required(login_url='login')  
 def dashboard(request):
-    return render(request, 'HTMLpages/dashboard.html')
+    company_name = ""
+    if hasattr(request.user, 'profile'):
+        company_name = request.user.profile.company_name
+    return render(request, 'HTMLpages/dashboard.html', {'company_name': company_name})
+
 def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 

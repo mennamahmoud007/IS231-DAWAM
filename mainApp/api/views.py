@@ -26,9 +26,8 @@ class JobViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-<<<<<<< Updated upstream
+
 
     def perform_create(self, serializer):
         serializer.save(applicant=self.request.user) # Automatically set the applicant to the logged-in user when creating an application
-=======
->>>>>>> Stashed changes
+
