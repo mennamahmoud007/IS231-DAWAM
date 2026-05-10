@@ -8,7 +8,6 @@ async function loadDashboard() {
         document.getElementById("stat-total").textContent = totalJobs;
         document.getElementById("stat-open").textContent = openJobs;
 
-        // 3. رسم الكروت (Jobs Grid)
         const jobsGrid = document.querySelector(".jobs-section .jobs-grid");
         jobsGrid.innerHTML = ""; 
 
