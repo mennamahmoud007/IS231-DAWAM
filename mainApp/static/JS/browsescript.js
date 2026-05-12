@@ -1,9 +1,24 @@
-// ============================================
-//              Browse Page
-// ============================================
 const isGuest = window.location.href.includes("guestBrowse");
 const jobListTag = document.querySelector('.job-list');
-const allJobs = JSON.parse(localStorage.getItem("jobs")) || [];
+
+let allJobs = []
+async function loadAndDisplayjobs(){
+    try{
+    const response = await fetch('/api/jobs/')
+    if(!response.ok){
+        throw new Error('Server error: ' +  response.status)
+    }
+    allJobs  = await response.json()
+    displayJobs(allJobs)
+    }
+    
+    catch(error){
+        console.error('Failed to load jobs:', error);
+        jobListTag.innerHTML = '<p>Failed to load jobs. Please try again.</p>';
+    }
+}
+
+loadAndDisplayjobs()
 
 function displayJobs(jobsToRender) {
     if (jobsToRender.length === 0) {
@@ -21,7 +36,7 @@ function displayJobs(jobsToRender) {
                 <p>Experience: ${job.experience}</p>
                 <p>Schedule: ${job.schedule}</p>
                 <span style="color: ${job.status === 'Open' ? 'green' : 'brown'}">Status: ${job.status}</span>
-                <a href="${isGuest ? 'login.html' : 'job-details.html?id=' + job.id}">View Details</a>
+                <a href="${isGuest ? 'login.html' : '/job-details/' + job.id + '/'}">View Details</a>
             </article>
         </li>`;
     });
@@ -72,5 +87,3 @@ document.querySelector('.search-bar').addEventListener("submit", function(e){
     e.preventDefault();
     filterjobs();
 });
-// buildCards(jobs); //Displays the cards once the page loads
-displayJobs(allJobs);
