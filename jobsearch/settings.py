@@ -123,5 +123,5 @@ STATIC_FILES_DIRS = [
 ]   
 
 
-
+AUTH_USER_MODEL = 'mainApp.CustomUser'
 LOGIN_URL = 'login'

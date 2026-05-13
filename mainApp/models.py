@@ -1,18 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class Profile(models.Model):
+class CustomUser(AbstractUser):
     USER_CHOICES = [
-        ('job-seeker', 'job-seeker'),
+        ('job_seeker', 'job_seeker'),
         ('company_admin', 'company_admin'),
     ]
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.CharField(max_length=20, choices=USER_CHOICES)
-    company_name = models.CharField(max_length=50, blank=True, null=True)
+    company_name = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__ (self):
-        return self.user.username
+        return self.username
 
 
 class Job(models.Model):
@@ -53,7 +53,7 @@ class Job(models.Model):
     benefits = models.TextField()
     industry = models.CharField(max_length=100)
     companySize = models.CharField(max_length=100)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     companyLocation = models.CharField(max_length=100)
 
     def __str__ (self):
@@ -67,7 +67,7 @@ class Application(models.Model):
     ]
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     schedule = models.CharField(max_length=100) 
-    applicant = models.ForeignKey(User, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     name = models.CharField(max_length=200)

@@ -1,28 +1,54 @@
-
+console.log("Login script loaded");
 //Login Page
+function getCookie(name){
+    let cookieValue = null;
+    if(document.cookie && document.cookie != ''){
+        const cookies = document.cookie.split(';');
+        for(let cookie of cookies){
+            cookie = cookie.trim();
+            if(cookie.startsWith(name + '=')){
+                cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
-const login = document.querySelector("form");
+const login = document.getElementById("loginForm");
+console.log("Form found:", login);
 
 if (login) {
 
-    login.addEventListener("submit", function (e) {
+    login.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const input = document.getElementById("username").value.trim();
+        const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value;
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const storedUser = users.find(user => (user.username === input || user.email === input) && user.password === password);
 
-        if (storedUser) {
-            localStorage.setItem("currentUser", JSON.stringify(storedUser));
+        const response = await fetch('/api/login/' , {
+            method : 'POST',
+            headers: {'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({username, password})
+        });
 
-            if (storedUser.type === "company") {
-                window.location.href = "dashboard.html";
+        const data = await response.json();
+        if(data.success){
+            localStorage.setItem("currentUser" , JSON.stringify({
+                username: data.username,
+                user_type: data.user_type,
+                company_name: data.company_name
+            }));
+            if (data.user_type === "company_admin") {
+                window.location.href = "/dashboard/";
             } else {
-                window.location.href = "browse.html";
+                window.location.href = "/browse/";
             }
-        } else {
-            alert("Incorrect username/email or password. Please try again.");
+        }
+        else{
+            alert(data.errors);
         }
     });
 }

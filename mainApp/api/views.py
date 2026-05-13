@@ -1,11 +1,11 @@
 from rest_framework import viewsets
-from ..models import Profile, Job, Application
+from ..models import CustomUser, Job, Application
 from .serializers import UserSerializer, JobDetailSerializer, JobListSerializer, ApplicationSerializer
 from django.shortcuts import render
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 class JobViewSet(viewsets.ModelViewSet):

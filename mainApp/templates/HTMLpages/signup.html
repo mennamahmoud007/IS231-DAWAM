@@ -23,7 +23,7 @@
         <h1 class="form-title"> Create Account </h1>
         <p class="myP"> Join DAWAM and start your journey</p>
 
-        <form id="signupForm" action="#" method="POST">
+        <form id="signupForm">
 
             <label for="username"> Username: </label> <br>
             <input type="text" id="username" name="username" placeholder="John Doe" required/> <br><br>
@@ -54,11 +54,10 @@
             <button type="submit"> Sign Up </button>
           
         </form>
-        <p> Already have an account? <a href="login.html"> Log in </a> </p>
+        <p> Already have an account? <a href="{% url 'login' %}">Log in</a> </p>
         <div id="signupSuccess" class="success-message"></div>
     </div>
-
-    <script src="{% static 'JS/signup-script.js' %}"></script>
+<script src="{% static 'js/signup-script.js' %}"></script>
 
 </body>
 
