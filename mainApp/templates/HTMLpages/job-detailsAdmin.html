@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css'%}" >
+</head>
+<body>
+     <nav class="navbar">
+        <div class="logo">DAWAM</div>
+        <ul class="navLinks"> 
+                <li> <a href="{% url 'add-job' %}">Add Job</a> </li>
+                <li> <a href="{% url 'dashboard' %}">My Jobs</a> </li>
+            <li> <a href="{% url 'logout' %}">Logout</a></li>
+        </ul> 
+    </nav>
+    <main class="job-details-page">
+  <section class="job-details-main-container">
+    <div class="job-details-main-containers">
+      <h1 id="job-title">Job Title</h1>
+      <ul>
+      <li><p id="job-id"><b>Job ID:</b> </p></li>
+       <li><p id="schedule"><b>Job Schedule:</b> </p></li>
+      <li><p id="job-category"><b>Job Category:</b> </p></li>
+      </ul>
+    </div>
+
+    <div class="job-details-main-containers">
+      <h2>Job Details</h2>
+      <ul>
+        <li id="location"><b>Location:</b> </li>
+        <li id="job-desc"><b>Description:</b> </li>
+        <li id="job-salary"><b>Salary:</b> </li>
+      </ul>
+    </div>
+
+    <div class="job-details-main-containers">
+      <h2>Job Requirements</h2>
+      <ul>
+        <li id="job-edu"><b>Education:</b> </li>
+        <li id="job-exp"><b>Experience:</b> </li>
+        <li id="job-gender"><b>Gender Preference:</b> </li>
+        <li id="tech-skills"><b>Tech Skills:</b> </li>
+        <li id="soft-skills"><b>Soft Skills:</b></li>
+      </ul>
+    </div>
+
+    <div class="job-details-main-containers">
+      <h2>Job Benefits</h2>
+      <ul id="benefits-list">
+        <li><b>Health Insurance:</b></li>
+        <li><b>Retirement Plan:</b></li>
+        <li><b>Flexible Working Hours:</b></li>
+        <li><b>Professional Development:</b></li>
+      </ul>
+    </div>
+
+    <div class="job-details-main-containers">
+      <h2>Company Information</h2>
+      <ul>
+      <li><p id="company-name"><b>Company Name:</b> </p></li>
+      <li><p id="company-industry"><b>Industry:</b> </p></li>
+      <li><p id="company-size"><b>Company Size:</b> </p></li>
+      <li><p id="company-location"><b>Company Location:</b> </p></li>
+      </ul>
+    </div>
+    <div class="edit-button">
+      <a href="{% url 'edit-job' job_id=job_id %}" class="btn-primary">Edit Job</a>
+    </div>
+  </section>
+
+</main>
+  <script>
+    const jobId = {{ job_id }};
+  </script>
+<script src="{% static 'JS/jobdetails.js' %}"></script> 
+</body>
+</html>
