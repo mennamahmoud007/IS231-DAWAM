@@ -50,7 +50,7 @@ async function loadDashboard() {
                         <a href="/edit-job/${job.id}/" style="background:var(--deep); padding:7px 14px; border-radius:8px; color:white; text-decoration:none;">Edit</a>
                         <a href="#" class="delete-link" data-id="${job.id}" style="background:#c0392b; padding:7px 14px; border-radius:8px; color:white; text-decoration:none;">Delete</a>
                     </div>
-                    <a href="/job-details/${job.id}/" class="btn-view">View Job Details</a>
+                    <a href="/job-detailsAdmin/${job.id}/" class="btn-view">View Job Details</a>
                 </div>
             `;
             jobsGrid.appendChild(card);

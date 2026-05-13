@@ -75,6 +75,8 @@ def login(request):
     return render(request, 'HTMLpages/login.html')
 def signup(request):
     return render(request, 'HTMLpages/signup.html')
+def job_detailsAdmin(request, job_id):
+    return render(request, 'HTMLpages/job-detailsAdmin.html', {'job_id': job_id})
 
 @login_required(login_url='login')  
 def dashboard(request):
@@ -87,4 +89,3 @@ def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 def editjob(request, job_id):
     return render(request, 'HTMLpages/edit-job.html', {'job_id': job_id})
-
