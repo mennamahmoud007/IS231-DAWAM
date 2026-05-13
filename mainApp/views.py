@@ -87,6 +87,7 @@ def dashboard(request):
         
     return render(request, 'HTMLpages/dashboard.html', {'company_name': company_name})
 
+@login_required(login_url='login')
 def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 def editjob(request, job_id):

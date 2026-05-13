@@ -37,6 +37,12 @@ class JobViewSet(viewsets.ModelViewSet):
         serializer.save(creator=self.request.user)
 
     def perform_update(self, serializer):
+
+        # stop other users from editing jobs they don't own
+        job = self.get_object()
+        if job.creator != self.request.user:
+          from rest_framework.exceptions import PermissionDenied
+          raise PermissionDenied("You can only edit your own jobs.")
         # Keep the original creator on edit
         serializer.save(creator=self.get_object().creator)
 
