@@ -31,23 +31,22 @@ def get_applications_api(request): #AJAX API to fetch applications for the logge
                 return JsonResponse({'error': str(e)}, status=400)
         return JsonResponse({'error': 'Not authenticated'}, status=401)
     
+   
     # Handle GET requests - fetch applications
     if request.user.is_authenticated:
-        applications = Application.objects.filter(applicant=request.user).values(
-            'id', 'job__title', 'job__company', 'job__location', 
+        all_apps = Application.objects.filter(applicant=request.user)
+        
+        total = all_apps.count()
+        review = all_apps.filter(status='Under Review').count()
+        accepted = all_apps.filter(status='Accepted').count()
+        rejected = all_apps.filter(status='Rejected').count()
+        response_rate = round(((accepted + rejected) / total) * 100) if total > 0 else 0
+
+        applications = all_apps.values(
+            'id', 'job__title', 'job__company', 'job__location',
             'date', 'status', 'job__schedule'
         )
-        
-        total = len(list(applications))
-        all_apps = Application.objects.filter(applicant=request.user)
-        review = all_apps.filter(status__icontains="Review").count()
-        accepted = all_apps.filter(status="Accepted").count()
-        rejected = all_apps.filter(status="Rejected").count()
-        
-        response_rate = 0
-        if total > 0:
-            response_rate = round(((accepted + rejected) / total) * 100)
-        
+
         return JsonResponse({
             'applications': list(applications),
             'stats': {

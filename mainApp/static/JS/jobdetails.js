@@ -97,7 +97,7 @@ let phoneInput = document.querySelector('input[name="phone"]');
     alert("Please fill all fields correctly!");
   }
   if(namevalid && emailvalid && phonevalid){
-    fetch('/api/applications/', {
+    fetch('/api/my-applications/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
