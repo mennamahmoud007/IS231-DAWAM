@@ -80,9 +80,11 @@ def job_detailsAdmin(request, job_id):
 
 @login_required(login_url='login')  
 def dashboard(request):
-    company_name = ""
-    if hasattr(request.user, 'profile'):
-        company_name = request.user.profile.company_name
+    company_name = request.user.company_name 
+    
+    if not company_name:
+        company_name = request.user.username
+        
     return render(request, 'HTMLpages/dashboard.html', {'company_name': company_name})
 
 def addjob(request):
