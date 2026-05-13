@@ -62,5 +62,5 @@ def dashboard(request):
 def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 def editjob(request, job_id):
-    return render(request, 'HTMLpagess/edit-job.html', {'job_id': job_id})
+    return render(request, 'HTMLpages/edit-job.html', {'job_id': job_id})
 
