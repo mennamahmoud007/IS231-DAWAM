@@ -9,19 +9,23 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class JobViewSet(viewsets.ModelViewSet):
-    queryset = Job.objects.all()
 
     def get_queryset(self):
-        queryset=Job.objects.all()
+        queryset = Job.objects.all()
 
-         # If the user is a company_admin, show only their jobs on dashboard
-        if self.request.query_params.get('mine') == 'true':
-            queryset = queryset.filter(creator=self.request.user)
+        is_mine = self.request.query_params.get('filter') == 'mine'
 
-        category=self.request.query_params.get('category') # reads ? category= from the URL
+        if is_mine:
+            if self.request.user.is_authenticated:
+                queryset = queryset.filter(creator=self.request.user)
+            else:
+                return Job.objects.none()
+
+        category = self.request.query_params.get('category')
         if category:
-            queryset=queryset.filter(category=category)
-        return queryset    
+            queryset = queryset.filter(category=category)
+
+        return queryset
 
     def get_serializer_class(self):
         if self.action == 'list':      # /api/jobs/

@@ -577,7 +577,17 @@ footer {
        margin-bottom: 10px;
        font-size: 18px;
       } 
-      
+      .edit-button {
+        background-color: var(--mid);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        align-items: center;
+      }
 
 /* Sign-up form  */
 .Sign-Up form {

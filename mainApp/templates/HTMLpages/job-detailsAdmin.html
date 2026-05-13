@@ -11,8 +11,8 @@
      <nav class="navbar">
         <div class="logo">DAWAM</div>
         <ul class="navLinks"> 
-            <li> <a href="{% url 'browse' %}">Browse Jobs</a> </li>
-            <li> <a href="{% url 'applied-jobs' %}" class="active">My applied jobs</a></li>
+                <li> <a href="{% url 'addjob' %}">Add Job</a> </li>
+                <li> <a href="{% url 'dashboard' %}">My Jobs</a> </li>
             <li> <a href="{% url 'logout' %}">Logout</a></li>
         </ul> 
     </nav>
@@ -66,38 +66,14 @@
       <li><p id="company-location"><b>Company Location:</b> </p></li>
       </ul>
     </div>
+    <div class="edit-button">
+      <a href="{% url 'edit-job' job_id=job_id %}" class="btn-primary">Edit Job</a>
+    </div>
   </section>
 
-  <aside id="job-details-sidebar">
-    <div class="job-details-sidebar-containers" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; " >
-      <button class="btn-primary apply-job-btn" id="apply-btn">Apply Now</button>
-      <button class="share-btn"><img src="{% static 'pictures/share-icon2.png' %}" alt="Share" class="share-icon"></button>
-    </div>
-    <div class="apply-form job-details-sidebar-containers">
-      <form id="application-form">
-        <h3>Fill the Application Form</h3>
-        <label class="applylabels">Name</label>
-        <input type="text" placeholder="Enter your name" class="apply-input" name="name">
-        <label class="applylabels">Email</label>
-        <input type="email" placeholder="Enter your email" class="apply-input" name="email">
-        <label class="applylabels">Phone Number</label>
-        <input type="tel" placeholder="Enter your phone number" class="apply-input" name="phone">
-        <input type="submit" class="btn-primary" value="Submit Application">
-      </form>
-    </div>
-
-    <div class="job-details-sidebar-containers">
-      <h2>Similar Jobs</h2>
-      <ul id="similar-jobs-list">
-        <li><a href="#" >Similar Job 1</a></li>
-        <li><a href="#" >Similar Job 2</a></li>
-        <li><a href="#" >Similar Job 3</a></li>
-      </ul>
-    </div>
-  </aside>
 </main>
   <script>
-    const jobId = {{ job_id}};
+    const jobId = {{ job_id }};
   </script>
 <script src="{% static 'JS/jobdetails.js' %}"></script> 
 </body>

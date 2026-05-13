@@ -13,5 +13,6 @@ urlpatterns = [
     path('guest-browse/', views.guest_browse, name='guest-browse'),
     path('dashboard/', views.dashboard, name = 'dashboard'),
     path('addjob/', views.addjob, name = 'addjob'),
-    path('edit-job/<int:job_id>/', views.editjob, name='edit-job')
+    path('edit-job/<int:job_id>/', views.editjob, name='edit-job'),
+    path('job-detailsAdmin/<int:job_id>/', views.job_detailsAdmin, name='job-detailsAdmin')
 ]
