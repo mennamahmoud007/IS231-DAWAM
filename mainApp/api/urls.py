@@ -6,7 +6,7 @@ from .logInView import LogInView
 
 router = DefaultRouter()
 router.register('profiles', UserViewSet)
-router.register('jobs', JobViewSet)
+router.register('jobs', JobViewSet, basename='job')
 router.register('applications', ApplicationViewSet)
 
 urlpatterns = router.urls + [

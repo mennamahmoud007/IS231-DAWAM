@@ -1,6 +1,6 @@
 async function loadDashboard() {
     try {
-        const response = await fetch('/api/jobs/');
+        const response = await fetch('/api/jobs/?filter=mine');
         const allJobs = await response.json();
 
         const totalJobs = allJobs.length;
