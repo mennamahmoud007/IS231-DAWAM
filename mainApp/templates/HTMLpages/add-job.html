@@ -128,7 +128,7 @@
     </form>
      
     <script>
-        window.company_name = "{{ request.user.profile.company_name }}";
+        window.company_name = "{{  request.user.company_name }}";
     </script>
     <script>
         const dashboard_url = "{% url 'dashboard' %}";

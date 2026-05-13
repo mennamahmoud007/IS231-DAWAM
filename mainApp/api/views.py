@@ -13,6 +13,11 @@ class JobViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset=Job.objects.all()
+
+         # If the user is a company_admin, show only their jobs on dashboard
+        if self.request.query_params.get('mine') == 'true':
+            queryset = queryset.filter(creator=self.request.user)
+
         category=self.request.query_params.get('category') # reads ? category= from the URL
         if category:
             queryset=queryset.filter(category=category)
@@ -28,6 +33,12 @@ class JobViewSet(viewsets.ModelViewSet):
         serializer.save(creator=self.request.user)
 
     def perform_update(self, serializer):
+
+        # stop other users from editing jobs they don't own
+        job = self.get_object()
+        if job.creator != self.request.user:
+          from rest_framework.exceptions import PermissionDenied
+          raise PermissionDenied("You can only edit your own jobs.")
         # Keep the original creator on edit
         serializer.save(creator=self.get_object().creator)
 

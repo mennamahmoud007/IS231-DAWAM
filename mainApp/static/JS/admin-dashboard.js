@@ -1,6 +1,6 @@
 async function loadDashboard() {
     try {
-        const response = await fetch('/api/jobs/');
+        const response = await fetch('/api/jobs/?mine=true'); // Gets only the logged-in admin's jobs
         const allJobs = await response.json();
 
         const totalJobs = allJobs.length;
