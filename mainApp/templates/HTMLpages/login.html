@@ -22,7 +22,7 @@
     
     <h2 class="form-title">Log into your account </h2>
     <div class="login-container">    
-        <form method="POST" action="#">
+        <form id="loginForm" >
             <label id = "username-label" for="username"><b>Username:</b></label> <br>
             <input type="text" id="username" name="username" placeholder="Username or email" required> <br><br>
             <label id="password-label" for="password"> <b>Password:</b></label><br>
@@ -34,7 +34,7 @@
         </form>
     </div>
     <p id="signup-link">Don't have an account?
-        <a href="signup.html">Sign up</a>
+        <a href="{% url 'signup' %}">Sign up</a>
     </p>
      <script>
         const dashboard_url = "{% url 'dashboard' %}";

@@ -82,8 +82,6 @@
         <input type="email" placeholder="Enter your email" class="apply-input" name="email">
         <label class="applylabels">Phone Number</label>
         <input type="tel" placeholder="Enter your phone number" class="apply-input" name="phone">
-          <label class="applylabels">Resume</label>
-        <input type="file" class="apply-input" name="resume">
         <input type="submit" class="btn-primary" value="Submit Application">
       </form>
     </div>
@@ -98,7 +96,9 @@
     </div>
   </aside>
 </main>
-  <script src="../JavaScript/data.js"></script>
+  <script>
+    const jobId = {{ job_id}};
+  </script>
 <script src="{% static 'JS/jobdetails.js' %}"></script> 
 </body>
 </html>

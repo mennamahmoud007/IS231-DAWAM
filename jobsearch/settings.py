@@ -121,3 +121,7 @@ STATIC_URL = 'static/'
 STATIC_FILES_DIRS = [
     BASE_DIR / 'mainApp/static',
 ]   
+
+
+AUTH_USER_MODEL = 'mainApp.CustomUser'
+LOGIN_URL = 'login'

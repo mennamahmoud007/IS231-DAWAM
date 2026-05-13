@@ -2,7 +2,20 @@
 //              Sign-Up Page
 // ============================================
 
-
+function getCookie(name){
+    let cookieValue = null;
+    if(document.cookie && document.cookie != ''){
+        const cookies = document.cookie.split(';');
+        for(let cookie of cookies){
+            cookie = cookie.trim();
+            if(cookie.startsWith(name + '=')){
+                cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 const signupForm = document.getElementById("signupForm");
 
 if(signupForm) {
@@ -38,19 +51,20 @@ if(signupForm) {
     }
 });
 
-    signupForm.addEventListener("submit", function(e) {
+    signupForm.addEventListener("submit", async function(e) {
 
         
         e.preventDefault();
         
 
-        let username = document.getElementById("username").value.trim();
-        let password = document.getElementById("password").value;
-        let confirmPassword = document.getElementById("confirm_password").value;
-        let email = document.getElementById("email").value.trim();
-        let isCompany = companyCheck.checked;
-        let companyName = document.getElementById("company_name").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+        const email = document.getElementById("email").value.trim();
+        const isCompany = companyCheck.checked;
+        const companyName = document.getElementById("company_name").value.trim();
 
+        //JS validation
         if (password !== confirmPassword) {
             confirmPasswordError.textContent = "Passwords do not match.";
             confirmPasswordError.style.display = "block";
@@ -58,34 +72,46 @@ if(signupForm) {
             return;
         }
 
-        let user = {
-            username: username,
-            password: password,
-            email: email,
-            type: isCompany ? "company" : "user",
-            company: isCompany ? companyName : null
-        };
-        
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        users.push(user);
-        localStorage.setItem("users", JSON.stringify(users));
+        const response = await fetch('/api/signup/',{
+            method : 'POST',
+            headers: {'Content-Type': 'application/json',
+                'X-CSRFToken' : getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                username, 
+                email,
+                password,
+                confirm_password: confirmPassword,
+                user_type : isCompany? 'company_admin': 'job_seeker',
+                company_name: isCompany? companyName : ''
+            })
+        });
+
+        const data = await response.json();
+        if(data.success){
+            localStorage.setItem("currentUser" , JSON.stringify({
+                username: data.username,
+                user_type: data.user_type,
+                company_name: data.company_name
+            }));
 
         const successMessage = document.getElementById("signupSuccess");
         successMessage.textContent = "Signed-up successfully!";
         successMessage.style.display = "block";
 
-
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        
         setTimeout(() => {
-            successMessage.style.display = "none";
-
-            if (isCompany) {
-            window.location.href = dashboard_url;
+            if (data.user_type === 'company_admin') {
+            window.location.href = "/dashboard/";
             } else {
-            window.location.href = browse_url;
+            window.location.href = "/browse/";
             }
-        },2000);
-    });
+        },500);
+    }
+    else{
+        const firstError = Object.values(data.errors)[0];
+        alert(Array.isArray(firstError) ? firstError[0] : firstError);
+    }
 }
+    )};
+
 
