@@ -28,22 +28,41 @@ fetch(`/api/jobs/${jobId}/`)
         benefitsList.innerHTML = job.benefits.split(',').map(b => `<li><strong>${b.trim()}</strong></li>`).join('');
         // it first splits the benefits string into an array using the comma as a separator, then maps each benefit to an HTML list item with strong tags for emphasis, and finally joins all the list items into a single string to set as the innerHTML of the benefitsList element.
     }
-    fetch(`/api/jobs/?category=${job.category}`).then(response => response.json()) //it is fetched inside the first fetch's then block to ensure that we have the job's category available before trying to fetch similar jobs based on that category
-     .then(allJobsData => {
-         const similarJobsList = document.querySelector('#similar-jobs-list');
-         const jobs= allJobsData.filter(j => j.category === job.category && j.id != job.id).slice(0, 3);
-         if (similarJobsList) {
-             similarJobsList.innerHTML = "";
-             jobs.forEach(job => {
-                 const li = document.createElement('li');
-                 li.innerHTML = `<a href="/job-details/${job.id}/">${job.title} at ${job.company}</a>`;
-                 similarJobsList.appendChild(li);
-             });
-         }
-     })
-     .catch(error => console.error('Error fetching similar jobs:', error));
-  }
-  ).catch(error => console.error('Error fetching job details:', error));
+    fetch(`/api/jobs/?category=${job.category}`)
+    .then(response => response.json())
+    .then(allJobsData => {
+        const similarJobsList = document.querySelector('#similar-jobs-list');
+        if (similarJobsList) {
+            similarJobsList.innerHTML = "";
+            let jobs = allJobsData.filter(j => j.id != job.id).slice(0, 3);
+
+            if (jobs.length === 0) {
+                
+                fetch('/api/jobs/')
+                    .then(response => response.json())
+                    .then(anyJobs => {
+                        const Nojobs = anyJobs.filter(j => j.id != jobId).slice(0, 3);
+                        if (Nojobs.length > 0) {
+                            Nojobs.forEach(j => {   // ✅ fixed typo
+                                const li = document.createElement('li');
+                                li.innerHTML = `<a href="/job-details/${j.id}/">${j.title} at ${j.company}</a>`;
+                                similarJobsList.appendChild(li);
+                            });
+                        } else {
+                            similarJobsList.innerHTML = "<li>No jobs found</li>";
+                        }
+                    })
+            } else {
+                jobs.forEach(j => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="/job-details/${j.id}/">${j.title} at ${j.company}</a>`;
+                    similarJobsList.appendChild(li);
+                });
+            }
+        }
+    })
+    .catch(error => console.error('Error fetching similar jobs:', error));
+  }).catch(error => console.error('Error fetching job details:', error));
 
 let applyBtn = document.getElementById('apply-btn');
 let applyForm = document.querySelector('.apply-form');
