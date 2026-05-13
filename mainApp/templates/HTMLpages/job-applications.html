@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Applications</title>
+    <link rel="stylesheet" href="{% static 'css/StyleSheet.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">DAWAM</div>
+    <ul class="navLinks">
+        <li><a href="{% url 'dashboard' %}">My Jobs</a></li>
+        <li><a href="{% url 'addjob' %}">Post a Job</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</nav>
+
+<br>
+<div class="container">
+    <h1 id="head">Applications</h1>
+    <p id="desc">Review candidates who applied for this position, and accept or reject their applications.</p>
+</div>
+
+<br>
+
+<div class="stats">
+    <div class="applied-card">
+        <p>Total Applied</p>
+        <h2 id="total">0</h2>
+    </div>
+    <div class="applied-card">
+        <p>Under Review</p>
+        <h2 id="review">0</h2>
+    </div>
+    <div class="applied-card highlight">
+        <p>Accepted</p>
+        <h2 id="accepted">0</h2>
+    </div>
+    <div class="applied-card">
+        <p>Rejected</p>
+        <h2 id="rejected">0</h2>
+    </div>
+</div>
+
+<br><br>
+
+<div id="emptyState" class="empty-state" style="display: none;">
+    <div class="empty-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+    </div>
+    <h2>No applications yet</h2>
+    <p>No one has applied for this job yet</p>
+    <a href="{% url 'dashboard' %}" class="btn-primary">Back to Dashboard</a>
+</div>
+
+<table class="jobs-table" id="tableContainer">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Applicant</th>
+            <th style="width: 20%;">Contact</th>
+            <th style="width: 15%;">Schedule</th>
+            <th style="width: 15%;">Applied Date</th>
+            <th style="width: 15%;">Status</th>
+            <th style="width: 15%;">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="applicationsBody">
+    </tbody>
+</table>
+
+<script src="{% static 'JS/job-applications.js' %}"></script>
+
+</body>
+</html>

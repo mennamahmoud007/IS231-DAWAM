@@ -1,6 +1,6 @@
 async function loadApplications() {
     try {
-        const response = await fetch('/api/applications/');
+        const response = await fetch('/api/my-applications/');
         const data = await response.json();
         if (data.error) {
             document.getElementById("emptyState").style.display = "block";
