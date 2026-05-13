@@ -1076,16 +1076,16 @@ background: #f2edf6;
   position: relative;
 }
 
-.dashboard-header {
+.dashboard-header::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:rgba(238, 238, 238, 0.3); 
+  background:rgba(238, 238, 238, 0.5); 
 }
 
 .dashboard-header h2 {
   font-family: serif;
-  font-size: 60px;
+  font-size: 40px;
   color: var(--deep);
   margin-bottom: 8px;
   text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
@@ -1229,21 +1229,24 @@ background: #f2edf6;
 
 .card-footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 4px;
 }
 
 .card-actions {
   display: flex;
-  gap: 12px;
+  gap: 8px;
+  width: 100%;
 }
 
 .card-actions a {
+  flex: 1;
   font-size: 13px;
   color: var(--white);
   text-decoration: none;
   font-weight: 600;
+  text-align: center;
 }
 
 
