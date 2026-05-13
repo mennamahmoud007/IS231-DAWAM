@@ -47,7 +47,7 @@ async function loadDashboard() {
                 </div>
                 <div class="card-footer">
                     <div class="card-actions">
-                        <a href="/edit-job/${job.id}/" style="background:var(--deep); padding:7px 14px; border-radius:8px; color:white; text-decoration:none;">Edit</a>
+                        <a href="/job-applications/?job=${job.id}" style="background:#27ae60; padding:7px 14px; border-radius:8px; color:white; text-decoration:none;">View Applications</a>
                         <a href="#" class="delete-link" data-id="${job.id}" style="background:#c0392b; padding:7px 14px; border-radius:8px; color:white; text-decoration:none;">Delete</a>
                     </div>
                     <a href="/job-detailsAdmin/${job.id}/" class="btn-view">View Job Details</a>

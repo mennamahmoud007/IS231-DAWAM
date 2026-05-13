@@ -7,7 +7,7 @@ from .logInView import LogInView
 router = DefaultRouter()
 router.register('profiles', UserViewSet)
 router.register('jobs', JobViewSet, basename='job')
-router.register('applications', ApplicationViewSet)
+router.register('applications', ApplicationViewSet, basename='application')
 
 urlpatterns = router.urls + [
     path('signup/', SignUpView.as_view(), name='api-signup'),

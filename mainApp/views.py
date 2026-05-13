@@ -92,3 +92,7 @@ def addjob(request):
     return render(request, 'HTMLpages/add-job.html')
 def editjob(request, job_id):
     return render(request, 'HTMLpages/edit-job.html', {'job_id': job_id})
+
+@login_required(login_url='login')
+def job_applications_view(request):
+    return render(request, 'HTMLpages/job-applications.html')
