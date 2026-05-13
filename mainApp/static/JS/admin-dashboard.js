@@ -28,7 +28,7 @@ async function loadDashboard() {
                 const applications = appData.results ? appData.results : appData;
                 job.applications_count = applications.length;
 
-                job.pending_count = applications.filter(app => app.status === "Pending").length;
+                job.pending_count = applications.filter(app => app.status === "Under Review").length;
             } catch (e) {
                 job.applications_count = 0;
                 job.pending_count = 0;
