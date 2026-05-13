@@ -67,6 +67,12 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(applicant=self.request.user) # Automatically set the applicant to the logged-in user when creating an application
 
-    
+    def perform_update(self, serializer):
+        # Only job creator can update application status
+        application = self.get_object()
+        if application.job.creator != self.request.user:
+            from rest_framework.exceptions import PermissionDenied
+            raise PermissionDenied("You can only update applications for your own jobs.")
+        serializer.save()
 
    

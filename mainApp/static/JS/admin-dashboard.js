@@ -20,6 +20,18 @@ async function loadDashboard() {
             return;
         }
 
+        // Load applications count for each job
+        for (const job of allJobs) {
+            try {
+                const appResponse = await fetch(`/api/applications/?job=${job.id}`);
+                const appData = await appResponse.json();
+                const applications = appData.results ? appData.results : appData;
+                job.applications_count = applications.length;
+            } catch (e) {
+                job.applications_count = 0;
+            }
+        }
+
         allJobs.forEach((job) => {
             const isOpen = job.status === "Open";
             const statusClass = isOpen ? "open-color" : "closed-color";
@@ -38,7 +50,7 @@ async function loadDashboard() {
                 </div>
                 <div class="card-stats">
                     <div class="stat-item">
-                        <span class="stat-value">0</span> <span class="stat-label">Applications</span>
+                        <span class="stat-value">${job.applications_count}</span> <span class="stat-label">Applications</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-value ${statusClass}">${job.status}</span>

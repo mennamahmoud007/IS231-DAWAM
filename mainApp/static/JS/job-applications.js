@@ -11,7 +11,9 @@ async function loadApplications() {
     try {
         const response = await fetch(`/api/applications/?job=${jobId}`);
         const data = await response.json();
-        const applications = data; // DRF returns a plain list here
+        
+        // Handle DRF pagination response
+        const applications = data.results ? data.results : data;
 
         // ---- UPDATE STATS ----
         const total = applications.length;
