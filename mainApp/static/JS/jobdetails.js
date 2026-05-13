@@ -1,11 +1,12 @@
 fetch(`/api/jobs/${jobId}/`)
 .then(response => response.json())
 .then(job => {
-
-    document.getElementById('job-title').textContent = job.title;
-    document.getElementById('company-name').innerHTML = `<strong>Company:</strong> ${job.company}`;
-    document.getElementById('location').innerHTML = `<strong>Location:</strong> ${job.location}`;
-    document.getElementById('schedule').innerHTML = `<strong>Schedule:</strong> ${job.schedule}`;
+  
+  document.getElementById('job-title').textContent = job.title;
+  document.getElementById('company-name').innerHTML = `<strong>Company:</strong> ${job.company}`;
+  document.getElementById('location').innerHTML = `<strong>Location:</strong> ${job.location}`;
+  document.getElementById('schedule').innerHTML = `<strong>Schedule:</strong> ${job.schedule}`;
+  window.jobSchedule = job.schedule;
 
     if(document.getElementById('job-desc')) document.getElementById('job-desc').innerHTML = `<strong>Description:</strong> ${job.description}`;
     if(document.getElementById('job-salary')) document.getElementById('job-salary').innerHTML = `<strong>Salary:</strong> ${job.salary}`;
@@ -89,6 +90,7 @@ let phoneInput = document.querySelector('input[name="phone"]');
         name: nameInput.value,
         email: emailInput.value,
         phone: phoneInput.value,
+        schedule: window.jobSchedule,
         status : "Under Review"
       })
     })
