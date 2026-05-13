@@ -2,89 +2,142 @@
 //              Add-Job Page
 // ============================================
 
+// Function to get CSRF token
+function getCSRFToken() {
+    // First try to get from cookie
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, 10) === 'csrftoken=') {
+                cookieValue = decodeURIComponent(cookie.substring(10));
+                break;
+            }
+        }
+    }
+    
+    // If not found in cookie, try to get from the form's hidden input
+    if (!cookieValue) {
+        const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfInput) {
+            cookieValue = csrfInput.value;
+        }
+    }
+    
+    return cookieValue;
+}
 
-const addjobForm = document.getElementById("addjobForm")
+const addjobForm = document.getElementById("addjobForm");
 
 if (addjobForm) {
-
-
-    //for company name auto fill in add form
-    const CurrentUser = JSON.parse(localStorage.getItem("currentUser"));
+    // For company name auto fill in add form
     const companyNameField = document.getElementById("company-name");
-
-    if (CurrentUser && CurrentUser.company && companyNameField) {
-        companyNameField.value = CurrentUser.company;
-        companyNameField.readOnly = true;//read only to prevent change
+    if (window.company_name && companyNameField && window.company_name !== 'None') {
+        companyNameField.value = window.company_name;
+        companyNameField.readOnly = true;
+        companyNameField.style.backgroundColor = '#f5f5f5';
     }
 
-
-    addjobForm.addEventListener("submit", function (e) {
-
-
+    addjobForm.addEventListener("submit", async function (e) {
         e.preventDefault();
+        
+        // Show loading state
+        const submitButton = addjobForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Adding...';
+        submitButton.disabled = true;
 
-        let title = document.getElementById("job-title").value.trim();
-        let schedule = document.getElementById("job-schedule").value;
-        let category = document.getElementById("category").value.trim();
-        let status = document.getElementById("status").value;
-        let applications = parseInt(document.getElementById("applications").value.trim()) || 0;
-        let description = document.getElementById("job-description").value.trim();
-        let salary = document.getElementById("job-salary").value.trim();
-        let education = document.getElementById("education").value;
-        let experience = document.getElementById("experience").value.trim();
-        let gender = document.getElementById("gender").value;
-        let techSkills = document.getElementById("tech-skills").value.trim();
-        let softSkills = document.getElementById("soft-skills").value.trim();
-        let benefits = document.getElementById("benefits").value.trim();
-        let company = document.getElementById("company-name").value.trim();
-        let industry = document.getElementById("industry").value.trim();
-        let companySize = document.getElementById("company-size").value.trim();
-        let location = document.getElementById("location").value.trim();
-        let companyLocation = document.getElementById("company-location").value.trim();
-        let creator = document.getElementById("creator").value.trim();
-
-        // Get existing jobs from localStorage or initialize array
-        let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-        // Auto-increment job ID based on last job in the array or start at 1 if no jobs exist
-        let id = jobs.length > 0 ? jobs[jobs.length - 1].id + 1 : 1;
-
-        let job = {
-            id: id,
-            title: title,
-            applications: 0, // Initialize applications to 0
-            schedule: schedule,
-            category: category,
-            status: status,
-            description: description,
-            salary: salary,
-            education: education,
-            experience: experience,
-            gender: gender,
-            techSkills: techSkills,
-            softSkills: softSkills,
-            benefits: benefits,
-            company: company,
-            industry: industry,
-            companySize: companySize,
-            location: location,
-            companyLocation: companyLocation,
-            creator: creator, 
+        const jobData = {
+            title: document.getElementById("job-title").value.trim(),
+            schedule: document.getElementById("job-schedule").value,
+            category: document.getElementById("category").value.trim(),
+            status: document.getElementById("status").value,
+            description: document.getElementById("job-description").value.trim(),
+            salary: document.getElementById("job-salary").value.trim(),
+            education: document.getElementById("education").value.trim(),
+            experience: document.getElementById("experience").value,
+            gender: document.getElementById("gender").value,
+            techSkills: document.getElementById("tech-skills").value.trim(),  
+            softSkills: document.getElementById("soft-skills").value.trim(),    
+            benefits: document.getElementById("benefits").value.trim(),
+            company: document.getElementById("company-name").value.trim(),     
+            industry: document.getElementById("industry").value.trim(),
+            companySize: document.getElementById("company-size").value.trim(), 
+            location: document.getElementById("location").value,               
+            companyLocation: document.getElementById("company-location").value.trim() 
         };
 
-        // Add new job to jobs array
-        jobs.push(job);
+        // Log the data being sent
+        console.log("Sending job data:", jobData);
 
-        // Save back to localStorage
-        localStorage.setItem("jobs", JSON.stringify(jobs));
-
-        const successMessage = document.getElementById("addjobSuccess");
-        successMessage.textContent = "Job added successfully!";
-        successMessage.style.display = "block";
-
-        setTimeout(() => {
-            successMessage.style.display = "none";
-            window.location.href = "dashboard.html";
-        }, 2000);
+        const apiUrl = window.location.origin + '/api/jobs/';
+        
+        try {
+            const csrfToken = getCSRFToken();
+            console.log("CSRF Token found:", csrfToken ? "Yes" : "No");
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify(jobData)
+            });
+            
+            const data = await response.json();
+            const successMessage = document.getElementById("addjobSuccess");
+            
+            if (response.ok) {
+                successMessage.textContent = "✓ Job added successfully! Redirecting to dashboard...";
+                successMessage.style.color = "green";
+                successMessage.style.backgroundColor = "#d4edda";
+                successMessage.style.padding = "10px";
+                successMessage.style.borderRadius = "5px";
+                successMessage.style.display = "block";
+                successMessage.style.marginTop = "20px";
+                
+                setTimeout(() => {
+                    window.location.href = dashboard_url;
+                }, 2000);
+            } else {
+                // Handle validation errors from Django REST Framework
+                let errorMessage = "Error: ";
+                if (typeof data === 'object') {
+                    // Format the error nicely
+                    if (data.hasOwnProperty('detail')) {
+                        errorMessage += data.detail;
+                    } else {
+                        errorMessage += JSON.stringify(data, null, 2);
+                    }
+                } else {
+                    errorMessage += data;
+                }
+                
+                successMessage.textContent = errorMessage;
+                successMessage.style.color = "red";
+                successMessage.style.backgroundColor = "#f8d7da";
+                successMessage.style.padding = "10px";
+                successMessage.style.borderRadius = "5px";
+                successMessage.style.display = "block";
+                successMessage.style.marginTop = "20px";
+                console.error("Server error:", data);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            const successMessage = document.getElementById("addjobSuccess");
+            successMessage.textContent = "❌ Network error: Could not connect to server. Please check if the server is running.";
+            successMessage.style.color = "red";
+            successMessage.style.backgroundColor = "#f8d7da";
+            successMessage.style.padding = "10px";
+            successMessage.style.borderRadius = "5px";
+            successMessage.style.display = "block";
+            successMessage.style.marginTop = "20px";
+        } finally {
+            // Re-enable button
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }
     });
 }

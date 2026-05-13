@@ -19,9 +19,10 @@
     </nav>
     <h1 id="myH"> Edit Job Posting </h1>
     <p id="myP"> Company admins can use this form to edit existing job. </p>
-    <a href="dashboard.html" class="back-link"> &larr; Back to Dashboard </a>
+    <a href="{% url 'dashboard' %}" class="back-link"> &larr; Back to Dashboard </a>
 
-    <form id="editjobForm" action="dashboard.html" method="Post">
+    <form id="editjobForm">
+        {% csrf_token %}
         <p id="myP2"> Update the job details below </p>
         <fieldset>
 
@@ -32,9 +33,9 @@
 
         <label for="job-schedule">  Schedule: </label>
         <select id="job-schedule" name="job-schedule" required>
-            <option value="full-time"> full-time</option>
-            <option value="part-time"> part-time</option>
-            <option value="internship"> internship</option>
+            <option value="Full-time"> Full-time</option>
+            <option value="Part-time"> Part-time</option>
+            <option value="Internship"> Internship</option>
         </select> <br><br>
 
         <label for="category"> Job Category: </label>
@@ -50,9 +51,6 @@
             <option value="Open"> Open</option>
             <option value="Closed"> Closed</option>
         </select> <br><br>
-
-        <label for="applications"> Applications: </label>
-        <input type="text" id="applications" name="applications" placeholder="e.g. 10" required> <br><br>
 
         <label for="job-description"> Job Description: </label>
         <textarea id="job-description" name="job-description" rows="5" cols="50" placeholder="Describe the role, responsibilities and what makes this opportunity special..." required></textarea> <br><br>
@@ -121,23 +119,21 @@
 
         </fieldset>
 
-        <fieldset>
-        <legend> Admin Information </legend>
-        <label for="creator"> Created By Admin: </label>
-        <input type="text" id="creator" name="creator" placeholder="Enter Admin Name" required> <br><br>
-
-        </fieldset>
     
     <div class="form-buttons">
-        <button type="button" class="cancel-btn" onclick="window.location.href='dashboard.html'"> Cancel </button>
+        <button type="button" class="cancel-btn" onclick="window.location.href='{{ dashboard_url }}'"> Cancel </button>
         <button type="submit"> Save Changes </button>
     </div>
 
     <div id="editjobSuccess" class="success-message"></div>
     </form>
-  
-    <script src="../JavaScript/data.js"></script>
-    <script src="{% static 'JS/editjob-script.js' %}"></script>
-
+    <script>
+        const dashboard_url = "{% url 'dashboard' %}";
+    </script>
+    <script>
+        // Django passes this from the view so we can use it in our JavaScript to fetch and update the correct job posting
+        window.job_id = {{ job_id }};
+    </script>   
+    <script src="{% static 'JS/editjob-script.js' %}"></script> 
 </body>
 </html>
