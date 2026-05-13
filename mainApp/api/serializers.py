@@ -52,6 +52,7 @@ class JobListSerializer(serializers.ModelSerializer):
 
 
 class JobDetailSerializer(serializers.ModelSerializer):
+    creator = serializers.PrimaryKeyRelatedField(read_only=True)  # Show creator's ID in detail view
     class Meta:
         model = Job
         fields = '__all__'

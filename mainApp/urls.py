@@ -12,7 +12,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('guest-browse/', views.guest_browse, name='guest-browse'),
     path('dashboard/', views.dashboard, name = 'dashboard'),
-    path('addjob/', views.addjob, name = 'addjob')
-    
-
+    path('addjob/', views.addjob, name = 'addjob'),
+    path('edit-job/<int:job_id>/', views.editjob, name='edit-job')
 ]

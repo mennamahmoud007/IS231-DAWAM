@@ -36,6 +36,10 @@
     <p id="signup-link">Don't have an account?
         <a href="{% url 'signup' %}">Sign up</a>
     </p>
+     <script>
+        const dashboard_url = "{% url 'dashboard' %}";
+        const browse_url = "{% url 'browse' %}";
+    </script>
      <script src="{% static 'JS/LoginScript.js' %}"></script>
 </body>
 
