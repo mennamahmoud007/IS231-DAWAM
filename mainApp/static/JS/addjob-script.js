@@ -48,7 +48,6 @@ if (addjobForm) {
         submitButton.textContent = 'Adding...';
         submitButton.disabled = true;
 
-        // FIXED: Match field names exactly with Django model
         const jobData = {
             title: document.getElementById("job-title").value.trim(),
             schedule: document.getElementById("job-schedule").value,
@@ -59,21 +58,20 @@ if (addjobForm) {
             education: document.getElementById("education").value.trim(),
             experience: document.getElementById("experience").value,
             gender: document.getElementById("gender").value,
-            techSkills: document.getElementById("tech-skills").value.trim(),    // Matches model field name
-            softSkills: document.getElementById("soft-skills").value.trim(),    // Matches model field name
+            techSkills: document.getElementById("tech-skills").value.trim(),  
+            softSkills: document.getElementById("soft-skills").value.trim(),    
             benefits: document.getElementById("benefits").value.trim(),
-            company: document.getElementById("company-name").value.trim(),      // 'company' not 'company_name'
+            company: document.getElementById("company-name").value.trim(),     
             industry: document.getElementById("industry").value.trim(),
-            companySize: document.getElementById("company-size").value.trim(),  // Matches model field name
-            location: document.getElementById("location").value,                // Matches model field name
-            companyLocation: document.getElementById("company-location").value.trim()  // Matches model field name
+            companySize: document.getElementById("company-size").value.trim(), 
+            location: document.getElementById("location").value,               
+            companyLocation: document.getElementById("company-location").value.trim() 
         };
 
-        // Debug: Log the data being sent
+        // Log the data being sent
         console.log("Sending job data:", jobData);
 
-        // Use the correct URL (without /api/ prefix)
-        const apiUrl = window.location.origin + '/jobs/';
+        const apiUrl = window.location.origin + '/api/jobs/';
         
         try {
             const csrfToken = getCSRFToken();

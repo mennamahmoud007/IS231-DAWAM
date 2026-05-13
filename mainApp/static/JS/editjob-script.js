@@ -67,7 +67,7 @@ editjobForm.addEventListener('submit', async function(e){
         status : document.getElementById("status").value,
         description : document.getElementById("job-description").value.trim(),
         salary : document.getElementById("job-salary").value.trim(),
-        education : document.getElementById("education").value,
+        education : document.getElementById("education").value.trim(),
         experience : document.getElementById("experience").value,
         gender : document.getElementById("gender").value,
         techSkills : document.getElementById("tech-skills").value.trim(),
