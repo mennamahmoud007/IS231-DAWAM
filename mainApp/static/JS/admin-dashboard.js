@@ -27,10 +27,18 @@ async function loadDashboard() {
                 const appData = await appResponse.json();
                 const applications = appData.results ? appData.results : appData;
                 job.applications_count = applications.length;
+
+                job.pending_count = applications.filter(app => app.status === "Pending").length;
             } catch (e) {
                 job.applications_count = 0;
+                job.pending_count = 0;
             }
         }
+        const totalApplications = allJobs.reduce((sum, job) => sum + job.applications_count, 0);
+        const pendingApplications = allJobs.reduce((sum, job) => sum + job.pending_count, 0);
+
+        document.getElementById("stat-apps").textContent = totalApplications;
+        document.getElementById("stat-pending").textContent = pendingApplications;
 
         allJobs.forEach((job) => {
             const isOpen = job.status === "Open";
