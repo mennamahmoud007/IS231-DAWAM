@@ -7,7 +7,7 @@ import json
 
 
 @login_required
-def get_applications_api(request): #AJAX API to fetch applications for the logged-in user
+def get_applications_api(request): 
     if request.method == 'POST':
     # Handle creating a new application
         if request.user.is_authenticated:
