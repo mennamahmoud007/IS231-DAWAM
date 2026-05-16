@@ -13,54 +13,45 @@
     <nav class="navbar">
   <div class="logo">DAWAM</div>
   <ul class="navLinks">
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="{% url 'guest-browse' %}">Browse Jobs</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}" class="nav-cta">Sign Up</a></li>
-       </ul>
- </nav>
+    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+    <li><a href="{% url 'guest-browse' %}">Browse Jobs</a></li>
+    <li><a href="{% url 'login' %}">Login</a></li>
+    <li><a href="{% url 'signup' %}" class="nav-cta">Sign Up</a></li>
+  </ul>
+</nav>
 
+<div class="page-wrapper">
+  <aside class="filters-aside">
+    <fieldset>
+      <legend>Work Schedule</legend>
+      <label><input type="checkbox" name="schedule" value="Full-time"> Full time</label><br>
+      <label><input type="checkbox" name="schedule" value="Part-time"> Part time</label><br>
+      <label><input type="checkbox" name="schedule" value="Internship"> Internship</label>
+    </fieldset>
+    <fieldset>
+      <legend>Location</legend>
+      <label><input type="checkbox" name="location" value="onsite">Onsite</label><br>
+      <label><input type="checkbox" name="location" value="remote">Remote</label><br>
+    </fieldset>
+    <fieldset>
+      <legend>Experience</legend>
+      <label><input type="checkbox" name="experience" value="0-1">0-1 years</label><br>
+      <label><input type="checkbox" name="experience" value="2-4">2-4 years</label><br>
+      <label><input type="checkbox" name="experience" value="+4">+4 years</label><br>
+    </fieldset>
+  </aside>
 
-    <div class="page-wrapper">
-        <aside class="filters-aside">
-            <h3>Filters</h3>
-            <fieldset>
-                <legend>Work Schedule</legend>
-            <label><input type="checkbox" name="schedule" value="Full-time"> Full time</label> <br>
-            <label><input type="checkbox" name="schedule" value="Part-time"> Part time</label> <br>
-            <label><input type="checkbox" name="schedule" value="Internship"> Internship</label>
-            </fieldset>
+  <section class="jobs-section">
+    <search class="search-bar-wrapper">
+      <label for="job-search"><b>Search for a job <span class="search-icon">🔍</span></b></label>
+      <form class="search-bar" action="" method="get">
+        <input type="search" id="job-search" placeholder="e.g. Software engineer" autofocus>
+        <button type="submit">Search</button>
+      </form>
+    </search>
+    <ul class="job-list"></ul>
+  </section>
+</div>
 
-            <fieldset> 
-                <legend>Location</legend>
-                <label><input type="checkbox" name="location" value="onsite">Onsite</label> <br>
-                <label><input type="checkbox" name="location" value="remote">Remote</label> <br>
-            </fieldset>
-
-            <fieldset> 
-                <legend>Experience</legend>
-                <label><input type="checkbox" name="experience" value="0-1">0-1 years</label> <br>
-                <label><input type="checkbox" name="experience" value="2-4">2-4 years</label> <br>
-                <label><input type="checkbox" name="experience" value="+4">+4 years</label> <br>
-            </fieldset>
-        </aside>
-
-        <section class="jobs-section">
-            <search class="search-bar-wrapper"> 
-                <label for="job-search"> <b>Search for a job</b></label> 
-                <form class="search-bar" action="" method="get">
-                    <input type="search" id="job-search" placeholder="e.g. Software engineer" autofocus>
-                    <button type="submit"> Search</button>
-                </form>
-            </search>
-                    
-            <ul class="job-list">
-            </ul>
-        </section>
-    </div>
-
-    
-    <script src="../JavaScript/data.js" ></script>
-    <script src="{% static 'JS/browsescript.js' %}"></script>
-</body>
-</html>
+<script src="../JavaScript/data.js"></script>
+<script src="{% static 'JS/browsescript.js' %}"></script>

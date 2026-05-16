@@ -18,11 +18,11 @@
             <li> <a href="{% url 'logout' %}">Logout</a></li>
         </ul> 
     </nav>
+    
 
 
     <div class="page-wrapper">
         <aside class="filters-aside">
-            <h3>Filters</h3>
             <fieldset>
                 <legend>Work Schedule</legend>
             <label><input type="checkbox" name="schedule" value="Full-time"> Full-Time</label> <br>
@@ -45,13 +45,17 @@
         </aside>
 
         <section class="jobs-section">
-            <search class="search-bar-wrapper"> 
-                <label for="job-search"> <b>Search for a job</b></label> 
-                <form class="search-bar" action="" method="get">
-                    <input type="search" id="job-search" placeholder="e.g. Software engineer" autofocus>
-                    <button type="submit"> Search</button>
-                </form>
-            </search>
+           <search class="search-bar-wrapper">
+    <label for="job-search"><b>Search for a job <span class="search-icon">🔍</span></b></label>
+     <div class="search-box">
+    <form class="search-bar" action="" method="get">
+      <div class="search-input-wrapper">
+        <input type="search" id="job-search" placeholder="e.g. Software engineer" autofocus>
+      </div>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</search>
                     
             <ul class="job-list">
                <!--Jobcards are displayed here-->

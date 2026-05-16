@@ -31,12 +31,17 @@ function displayJobs(jobsToRender) {
         <li>
             <article>
                 <h3>${job.title}</h3>
-                <p>${job.company} - ${job.location}</p> 
-                <p>Salary: ${job.salary}</p>
-                <p>Experience: ${job.experience}</p>
-                <p>Schedule: ${job.schedule}</p>
-                <span style="color: ${job.status === 'Open' ? 'green' : 'brown'}">Status: ${job.status}</span>
-                <a href="${isGuest ? 'login.html' : '/job-details/' + job.id + '/'}">View Details</a>
+                <p class="card-company">${job.company}</p>
+                <div class="card-tags">
+                    <span class="card-tag">${job.location}</span>
+                    <span class="card-tag">${job.schedule}</span>
+                    <span class="card-tag">${job.experience}</span>
+                </div>
+                <div class="card-salary">$${job.salary} / month</div>
+                <div class="card-footer-row">
+                    <span class="${job.status === 'Open' ? 'status-open' : 'status-closed'}">${job.status}</span>
+                    <a href="${isGuest ? 'login.html' : '/job-details/' + job.id + '/'}">View details →</a>
+                </div>
             </article>
         </li>`;
     });
