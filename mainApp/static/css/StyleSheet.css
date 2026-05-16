@@ -575,7 +575,7 @@ footer {
       }
       .job-details-page h1,
       .job-details-page h2 {
-         color: #8455ba;
+         color: #2d5b9f;
          font-weight: bold;
       }
 
@@ -707,6 +707,8 @@ footer {
   cursor: pointer;
 }
 
+
+
 /* Add-Job Form */
 .add-job #myH,
 .add-job #myP {
@@ -731,7 +733,7 @@ footer {
 .add-job form {
   max-width: 600px;
   margin: 20px auto 40px auto;
-  background-color: #F3E8FF;
+  background-color: #D8E4F0;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -741,8 +743,8 @@ footer {
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 10px;
-  background-color: #faf7ff;
-  border: 1px solid #C4B5FD;
+  background-color: #EBF0F8;
+  border: 1px solid #B8C8E0;
 }
 
 .add-job legend {
@@ -762,7 +764,7 @@ footer {
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 15px;
-  border: 1px solid #C4B5FD;
+  border: 1px solid #B8C8E0;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -771,8 +773,8 @@ footer {
 .add-job select:focus,
 .add-job textarea:focus {
   outline: none;
-  border-color: rgb(145, 105, 174);
-  box-shadow: 0 0 5px rgba(145, 105, 174, 0.5);
+  border-color: #1B2A4A;
+  box-shadow: 0 0 5px #1B2A4A;
 }
 
 .add-job .form-buttons {
@@ -783,7 +785,7 @@ footer {
 }
 
 .add-job button[type="submit"] {
-  background-color: rgb(145, 105, 174);
+  background-color: #1B2A4A;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -795,13 +797,13 @@ footer {
 }
 
 .add-job button[type="submit"]:hover {
-  background-color: rgb(106, 57, 152);
+  background-color: #C9A84C;
 }
 
 .add-job .cancel-btn {
   background-color: white;
   color: #000;
-  border: 1.5px solid #C4B5FD;
+  border: 1.5px solid #B8C8E0;
   padding: 10px 20px;
   margin: 10px auto;
   border-radius: 5px;
@@ -923,8 +925,9 @@ footer {
   text-align: left;
   margin: 0px ;
   font-size: 48px;
-  color: #3B1E54;
+  color: #0D1829;
 }
+
 #desc {
   text-align: left;
   margin: 10px 0px 0px;
@@ -952,7 +955,15 @@ footer {
 .applied-card h2 {
   margin: 10px 0 0;
 }
-
+:root {
+  --deep: #1B2A4A;
+  --mid: #C9A84C;
+  --light: #B8C8E0;
+  --verylight: #D8E4F0;
+  --pale: #EBF0F8;
+  --white: #ffffff;
+  --wow: #0D1829;
+}
 .response {
   background: var(--white);
   color: var(--deep);
@@ -974,7 +985,7 @@ footer {
 
 .empty-icon {
     font-size: 50px;
-    background: #f3f0f7;
+    background: #B8C8E0;
     width: 80px;
     height: 80px;
     line-height: 80px;
@@ -1006,8 +1017,8 @@ footer {
   padding: 15px;
   font-size: 16px;
   font-weight: 600;
-  color: gray;
-  background-color: #f2edf6;
+  color: rgb(99, 98, 98);
+  background-color: #B8C8E0;
   display: table-header-group; 
   width: 100%;
 }
@@ -1046,7 +1057,7 @@ footer {
 }
 
 .jobs-table tr:hover {
-background: #f2edf6;
+background: #EBF0F8;
 }
 
 .badge {
@@ -1082,37 +1093,54 @@ background: #f2edf6;
 
 .dashboard-header {
   text-align: center;
-  padding: 90px 20px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  padding: 90px 20px 60px 20px; 
+  background: linear-gradient(180deg, rgba(216, 228, 240, 0.4) 0%, var(--pale) 100%);
   position: relative;
+  overflow: hidden; 
 }
 
 .dashboard-header::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:rgba(238, 238, 238, 0.5); 
+  background-image: radial-gradient(var(--light) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  opacity: 0.5; 
+  z-index: 1;
+}
+
+.dashboard-header::after {
+  content: '';
+  position: absolute;
+  right: -100px;
+  top: -50px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--light) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: 1;
 }
 
 .dashboard-header h2 {
-  font-family: serif;
-  font-size: 40px;
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: 44px;
+  font-weight: 600;
   color: var(--deep);
-  margin-bottom: 8px;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
   position: relative;
+  z-index: 2;
 }
-
 
 .dashboard-header p {
-  color: #444;
-  font-size: 15px;
-  font-weight: bold;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+  color: #555555; 
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   position: relative;
+  z-index: 2;
 }
+
 
 /* stats Cards */
 .stats-bar {
@@ -1130,6 +1158,7 @@ background: #f2edf6;
     border-radius: 12px;
     padding: 18px 16px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card h3 {
@@ -1171,14 +1200,21 @@ background: #f2edf6;
 .jobs-section .job-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 20px 22px;
-  border-radius: 12px;
-  border: 1px solid var(--light);
+  gap: 12px;
+  padding: 24px; 
+  border-radius: 16px; 
+  border: 1px solid rgba(184, 200, 224, 0.4); 
   background: var(--white);
-  box-shadow: 0 2px 8px rgba(59, 30, 84, 0.06);
+  box-shadow: 0 4px 20px rgba(27, 42, 74, 0.03); 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.jobs-section .job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(27, 42, 74, 0.08); 
+  border-color: var(--light); 
+}
 
 .card-title {
   font-size: 17px;
@@ -1545,6 +1581,8 @@ background: #f2edf6;
             font-style: italic;
         }
 
+
+      
       /* Edit-Job Form */
       .edit-job #myH,
       .edit-job #myP {
@@ -1569,7 +1607,7 @@ background: #f2edf6;
       .edit-job form {
         max-width: 600px;
         margin: 20px auto 40px auto;
-        background-color: #F3E8FF;
+        background-color: #D8E4F0;
         padding: 25px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1579,8 +1617,8 @@ background: #f2edf6;
         margin-bottom: 20px;
         padding: 15px;
         border-radius: 10px;
-        background-color: #faf7ff;
-        border: 1px solid #C4B5FD;
+        background-color: var(--pale);
+        border: 1px solid var(--light);
       }
 
       .edit-job legend {
@@ -1600,17 +1638,18 @@ background: #f2edf6;
         padding: 10px;
         margin-top: 5px;
         margin-bottom: 15px;
-        border: 1px solid #C4B5FD;
+        border: 1px solid var(--light);
         border-radius: 8px;
         box-sizing: border-box;
       }
 
+      
       .edit-job input:focus,
       .edit-job select:focus,
       .edit-job textarea:focus {
         outline: none;
-        border-color: rgb(145, 105, 174);
-        box-shadow: 0 0 5px rgba(145, 105, 174, 0.5);
+        border-color: var(--deep);
+        box-shadow: 0 0 5px var(--deep);
       }
 
       .edit-job .form-buttons {
@@ -1621,7 +1660,7 @@ background: #f2edf6;
       }
 
       .edit-job button[type="submit"] {
-        background-color: rgb(145, 105, 174);
+        background-color: var(--deep);
         color: white;
         border: none;
         padding: 10px 20px;
@@ -1633,13 +1672,13 @@ background: #f2edf6;
       }
 
       .edit-job button[type="submit"]:hover {
-        background-color: rgb(106, 57, 152);
+        background-color: var(--mid);
       }
 
       .edit-job .cancel-btn {
         background-color: white;
         color: #000;
-        border: 1.5px solid #C4B5FD;
+        border: 1.5px solid var(--light);
         padding: 10px 20px;
         margin: 10px auto;
         border-radius: 5px;
