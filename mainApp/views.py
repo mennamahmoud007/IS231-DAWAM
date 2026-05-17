@@ -9,7 +9,6 @@ import json
 @login_required
 def get_applications_api(request): 
     if request.method == 'POST':
-    # Handle creating a new application
         if request.user.is_authenticated:
             try:
                 data = json.loads(request.body)
@@ -32,7 +31,6 @@ def get_applications_api(request):
         return JsonResponse({'error': 'Not authenticated'}, status=401)
     
    
-    # Handle GET requests - fetch applications
     if request.user.is_authenticated:
         all_apps = Application.objects.filter(applicant=request.user)
         
