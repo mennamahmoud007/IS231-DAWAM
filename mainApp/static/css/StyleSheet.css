@@ -512,7 +512,9 @@ footer {
   justify-content: space-between;
   max-width: 1300px;
   margin:0 auto;
-  padding : 0 60px;
+  padding : 30px 60px;
+  color:#2F3E46
+
 }
 
 #job-details-sidebar {
@@ -526,19 +528,26 @@ footer {
 
 .job-details-sidebar-containers {
   padding: 20px;
-  border: 1.5px solid var(--light);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-bottom: 20px;
+  background-color: var(--white);
+  border: 1px solid var(--verylight);
+ box-shadow: 0 4px 12px rgba(27, 42, 74, 0.04);
+  border-radius: 12px;
+  margin-bottom: 25px;
   margin-left: 30px;
 
 }
 
 .job-details-main-containers {
-  padding: 20px;
-  border: 1.5px solid var(--light);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px; /*20px*/
+  background-color: #fcfdfe; /* Crisp bright inner background */ 
+  border: 1.5px solid var(--verylight);
+  box-shadow: 0 4px 12px rgba(27, 42, 74, 0.04); /* Softer, deep-toned shadow */
   border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.job-details-main-containers:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(27, 42, 74, 0.08);
 }
 
 .job-details-main-container {
@@ -547,7 +556,7 @@ footer {
   justify-content: space-between;
   flex: 3;
   margin-top: 20px;
-  gap:20px;
+  gap:25px;
 }
 
 #application-form {
@@ -588,7 +597,7 @@ footer {
        font-size: 18px;
       } 
       .edit-button {
-        background-color: var(--mid);
+        background-color: transparent;
         color: white;
         border: none;
         padding: 10px 20px;
