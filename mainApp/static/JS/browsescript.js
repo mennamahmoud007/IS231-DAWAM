@@ -37,7 +37,7 @@ function displayJobs(jobsToRender) {
                     <span class="card-tag">${job.schedule}</span>
                     <span class="card-tag">${job.experience}</span>
                 </div>
-                <div class="card-salary">$${job.salary} / month</div>
+                <div class="card-salary">$${job.salary}</div>
                 <div class="card-footer-row">
                     <span class="${job.status === 'Open' ? 'status-open' : 'status-closed'}">${job.status}</span>
                     <a href="${isGuest ? 'login.html' : '/job-details/' + job.id + '/'}">View details →</a>

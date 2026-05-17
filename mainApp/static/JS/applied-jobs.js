@@ -44,7 +44,7 @@ async function loadApplications() {
                         </span>
                     </td>
                     <td>
-                        <a href="/job-details/${app.id}/" class="view-btn">
+                        <a href="/job-details/${app.job__id}/" class="view-btn">
                             View Job
                         </a>
                     </td>

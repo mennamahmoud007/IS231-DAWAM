@@ -41,7 +41,7 @@ def get_applications_api(request):
         response_rate = round(((accepted + rejected) / total) * 100) if total > 0 else 0
 
         applications = all_apps.values(
-            'id', 'job__title', 'job__company', 'job__location',
+            'id', 'job__id', 'job__title', 'job__company', 'job__location',
             'date', 'status', 'job__schedule'
         )
 
