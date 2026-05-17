@@ -528,7 +528,7 @@ footer {
 
 .job-details-sidebar-containers {
   padding: 20px;
-  background-color: var(--white);
+ background-color: #fcfdfe;
   border: 1px solid var(--verylight);
  box-shadow: 0 4px 12px rgba(27, 42, 74, 0.04);
   border-radius: 12px;
