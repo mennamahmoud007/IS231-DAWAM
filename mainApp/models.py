@@ -36,14 +36,12 @@ class Job(models.Model):
     ]
 
     title = models.CharField(max_length=100) 
-    #applications = models.IntegerField(), count of actual job objects
     company= models.CharField(max_length=100)
     salary = models.CharField(max_length=100)
     experience= models.CharField(max_length=20, choices = EXPERIENCE_CHOICES)
     schedule = models.CharField(max_length=100, choices = SCHEDULE_CHOICES) 
     location = models.CharField(max_length=100, choices = LOCATION_CHOICES)
     status = models.CharField(max_length=100, choices = STATUS_CHOICES)
-    #link: "job-details.html",
     category= models.CharField(max_length=100)
     description = models.TextField()
     education = models.CharField(max_length=100)
